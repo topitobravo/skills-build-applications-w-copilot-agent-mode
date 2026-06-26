@@ -1,4 +1,4 @@
-import { connectToDatabase } from '../database';
+import { connectToDatabase } from '../config/database';
 import { seedData } from '../models';
 
 const runSeed = async () => {

@@ -1,4 +1,4 @@
-import { MONGO_URI } from './database';
+import { MONGO_URI } from './config/database';
 
 export const PORT = Number(process.env.PORT || 8000);
 export const baseUrl = process.env.CODESPACE_NAME

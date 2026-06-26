@@ -1,6 +1,6 @@
 import express from 'express';
 import { PORT, baseUrl } from './config';
-import { connectToDatabase } from './database';
+import { connectToDatabase } from './config/database';
 import routes from './routes';
 import { seedData } from './models';
 
