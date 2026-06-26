@@ -1,20 +1,24 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { MONGO_URI, PORT, baseUrl } from './config';
+import routes from './routes';
+import { seedData } from './models';
 
 const app = express();
-const PORT = process.env.PORT || 8000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/octofit_db';
 
 app.use(express.json());
+app.use('/api', routes);
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', message: 'OctoFit Tracker API is running' });
+  res.json({ status: 'ok', message: 'OctoFit Tracker API is running', baseUrl });
 });
 
 const startServer = async () => {
   await mongoose.connect(MONGO_URI);
+  await seedData();
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
+    console.log(`API base URL: ${baseUrl}`);
   });
 };
 
