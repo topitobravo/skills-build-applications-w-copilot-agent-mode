@@ -1,6 +1,6 @@
 import express from 'express';
-import mongoose from 'mongoose';
-import { MONGO_URI, PORT, baseUrl } from './config';
+import { PORT, baseUrl } from './config';
+import { connectToDatabase } from './database';
 import routes from './routes';
 import { seedData } from './models';
 
@@ -14,7 +14,7 @@ app.get('/api/health', (_req, res) => {
 });
 
 const startServer = async () => {
-  await mongoose.connect(MONGO_URI);
+  await connectToDatabase();
   await seedData();
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);

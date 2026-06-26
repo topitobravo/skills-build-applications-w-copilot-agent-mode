@@ -1,16 +1,16 @@
-import mongoose from 'mongoose';
-import { MONGO_URI } from '../config';
+import { connectToDatabase } from '../database';
 import { seedData } from '../models';
 
 const runSeed = async () => {
   console.log('Seed the octofit_db database with test data');
-  await mongoose.connect(MONGO_URI);
+  await connectToDatabase();
 
   try {
     await seedData();
     console.log('Seed complete.');
   } finally {
-    await mongoose.disconnect();
+    const mongoose = await import('mongoose');
+    await mongoose.default.disconnect();
   }
 };
 
