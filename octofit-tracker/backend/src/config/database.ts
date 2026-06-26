@@ -6,5 +6,5 @@ export const connectToDatabase = async () => {
   await mongoose.connect(MONGO_URI);
   return mongoose.connection;
 };
-
+//caca
 export default mongoose;
