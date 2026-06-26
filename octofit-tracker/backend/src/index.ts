@@ -1,5 +1,5 @@
 import express from 'express';
-import { PORT, baseUrl } from './config';
+import { PORT, Url } from './server';
 import { connectToDatabase } from './config/database';
 import routes from './routes';
 import { seedData } from './models';
@@ -10,7 +10,7 @@ app.use(express.json());
 app.use('/api', routes);
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', message: 'OctoFit Tracker API is running', baseUrl });
+  res.json({ status: 'ok', message: 'OctoFit Tracker API is running', Url });
 });
 
 const startServer = async () => {
@@ -18,7 +18,7 @@ const startServer = async () => {
   await seedData();
   app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
-    console.log(`API base URL: ${baseUrl}`);
+    console.log(`API base URL: ${Url}`);
   });
 };
 
